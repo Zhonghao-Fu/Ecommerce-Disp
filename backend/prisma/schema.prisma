@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Product model
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  price       Int      // 价格（单位：分）
+  description String   @default("")
+  images      String   @default("[]") // JSON 字符串数组
+  status      String   @default("on_sale") // on_sale | off_sale
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("products")
+}
