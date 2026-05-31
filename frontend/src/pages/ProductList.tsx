@@ -87,14 +87,17 @@ export default function ProductList() {
       )}
 
       {/* Results Info */}
-      {pagination && (
+      {pagination && pagination.total !== undefined && (
         <div className={styles.resultsInfo}>
-          <span dangerouslySetInnerHTML={{
-            __html: intl.formatMessage(
+          <span>
+            {intl.formatMessage(
               { id: 'product.results' },
-              { total: pagination.total }
-            )
-          }} />
+              { 
+                total: pagination.total,
+                strong: (chunks: React.ReactNode) => <strong>{chunks}</strong>
+              }
+            )}
+          </span>
           {filters.keyword && (
             <span>, {intl.formatMessage({ id: 'product.searchKeyword' }, { keyword: filters.keyword })}</span>
           )}
