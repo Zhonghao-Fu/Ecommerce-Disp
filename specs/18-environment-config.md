@@ -99,7 +99,7 @@ VITE_APP_NAME=我的小店
 VITE_APP_DESCRIPTION=个人电商商品展示平台
 
 # API 配置
-VITE_API_BASE_URL=http://localhost:4000/api
+VITE_API_BASE_URL=http://localhost:4000
 VITE_API_TIMEOUT=10000
 
 # 功能开关
@@ -143,7 +143,7 @@ VITE_APP_NAME=应用名称
 VITE_APP_DESCRIPTION=应用描述
 
 # API 配置
-VITE_API_BASE_URL=http://localhost:4000/api
+VITE_API_BASE_URL=http://localhost:4000
 VITE_API_TIMEOUT=10000
 
 # 功能开关

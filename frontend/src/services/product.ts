@@ -11,7 +11,7 @@ import type {
   UpdateProductRequest,
   UpdateStatusRequest
 } from '../types'
-import { centsToYuan, yuanToCents, parseImages, serializeImages } from '../utils'
+import { centsToYuan, yuanToCents, parseImages } from '../utils'
 
 /**
  * Transform backend product response to frontend format
@@ -44,7 +44,7 @@ function transformProductToBackend(product: CreateProductRequest): any {
   return {
     ...product,
     price: yuanToCents(product.price),
-    images: serializeImages(product.images || [])
+    images: product.images || []  // 后端期望数组，不需要序列化
   }
 }
 
@@ -55,7 +55,7 @@ function buildQueryParams(filters: ProductFilterState): ProductQueryParams {
   const params: ProductQueryParams = {
     page: filters.page,
     pageSize: filters.pageSize,
-    status: filters.status === 'all' ? undefined : filters.status,
+    status: filters.status,  // 传递 status 参数，包括 'all'
     sortBy: filters.sortBy,
     sortOrder: filters.sortOrder
   }
@@ -122,7 +122,8 @@ export const productApi = {
       throw new Error(response.data.error?.message || 'Product not found')
     }
 
-    return transformProductFromBackend(response.data.data.product)
+    // Backend returns product object directly, not wrapped in { product: {...} }
+    return transformProductFromBackend(response.data.data as any)
   },
 
   /**
@@ -136,7 +137,8 @@ export const productApi = {
       throw new Error(response.data.error?.message || 'Failed to create product')
     }
 
-    return transformProductFromBackend(response.data.data.product)
+    // Backend returns product object directly
+    return transformProductFromBackend(response.data.data as any)
   },
 
   /**
@@ -150,7 +152,7 @@ export const productApi = {
     }
     
     if (updates.images !== undefined) {
-      backendUpdates.images = serializeImages(updates.images)
+      backendUpdates.images = updates.images  // 后端期望数组，不需要序列化
     }
 
     const response = await apiClient.put<ApiResponse>(
@@ -162,7 +164,8 @@ export const productApi = {
       throw new Error(response.data.error?.message || 'Failed to update product')
     }
 
-    return transformProductFromBackend(response.data.data.product)
+    // Backend returns product object directly
+    return transformProductFromBackend(response.data.data as any)
   },
 
   /**
@@ -170,7 +173,7 @@ export const productApi = {
    */
   async updateProductStatus(id: string, status: UpdateStatusRequest['status']): Promise<Product> {
     const response = await apiClient.patch<ApiResponse>(
-      API_ENDPOINTS.PRODUCT_BY_ID(id),
+      API_ENDPOINTS.PRODUCT_STATUS(id),
       { status }
     )
 
@@ -178,7 +181,8 @@ export const productApi = {
       throw new Error(response.data.error?.message || 'Failed to update product status')
     }
 
-    return transformProductFromBackend(response.data.data.product)
+    // Backend returns product object directly
+    return transformProductFromBackend(response.data.data as any)
   },
 
   /**

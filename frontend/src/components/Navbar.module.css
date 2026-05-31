@@ -19,6 +19,20 @@
   height: 70px;
 }
 
+/* Nav Right Section (Links + Language Selector) */
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Selectors Container */
+.selectors {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
 /* Logo */
 .logo {
   display: flex;
@@ -164,6 +178,15 @@
 .mobileNavLink.active {
   background-color: #e6f7ff;
   color: #1890ff;
+}
+
+/* Mobile Language & Currency Selectors */
+.mobileSelectors {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+  border-top: 1px solid #f0f0f0;
+  margin-top: 8px;
 }
 
 /* Responsive */

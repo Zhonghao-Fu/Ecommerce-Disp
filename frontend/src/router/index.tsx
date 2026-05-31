@@ -5,6 +5,7 @@ import { Loading } from '../components'
 // Lazy load pages for code splitting
 const ProductList = lazy(() => import('../pages/ProductList'))
 const ProductDetail = lazy(() => import('../pages/ProductDetail'))
+const ProductManagement = lazy(() => import('../pages/Admin/ProductManagement'))
 
 // Placeholder pages (can be created later)
 function AboutPage() {
@@ -99,6 +100,9 @@ export default function AppRouter() {
         {/* Product Routes */}
         <Route path="/products" element={<ProductList />} />
         <Route path="/products/:id" element={<ProductDetail />} />
+
+        {/* Admin Routes (Hidden, no navbar link) */}
+        <Route path="/admin/products" element={<ProductManagement />} />
 
         {/* Static Pages */}
         <Route path="/about" element={<AboutPage />} />

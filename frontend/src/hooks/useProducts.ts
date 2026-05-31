@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { productApi } from '../services'
 import type { ProductListItem, ProductFilterState, PaginationInfo } from '../types'
 
@@ -30,7 +30,7 @@ interface UseProductsReturn {
 
 const DEFAULT_FILTERS: ProductFilterState = {
   page: 1,
-  pageSize: 12,
+  pageSize: 10,
   status: 'all',
   sortBy: 'createdAt',
   sortOrder: 'desc'
@@ -51,11 +51,20 @@ export function useProducts(options: UseProductsOptions = {}): UseProductsReturn
     ...initialFilters
   })
 
+  // Use ref to track current filters without causing re-renders
+  const filtersRef = useRef(filters)
+  
+  // Update ref when filters change
+  useEffect(() => {
+    filtersRef.current = filters
+  }, [filters])
+
   /**
    * Fetch products from API
    */
   const fetchProducts = useCallback(async (overrideFilters?: Partial<ProductFilterState>) => {
-    const currentFilters = overrideFilters || filters
+    // Always use the latest filters from ref
+    const currentFilters = overrideFilters || filtersRef.current
     
     setLoading(true)
     setError(null)
@@ -71,17 +80,35 @@ export function useProducts(options: UseProductsOptions = {}): UseProductsReturn
     } finally {
       setLoading(false)
     }
-  }, [filters])
+  }, [])  // No dependencies - always uses latest filters via ref
 
   /**
    * Update filters and reset to page 1
    */
   const updateFilters = useCallback((newFilters: Partial<ProductFilterState>) => {
-    setFiltersState(prev => ({
-      ...prev,
-      ...newFilters,
-      page: newFilters.page || 1  // Reset to page 1 on filter change
-    }))
+    setFiltersState(prev => {
+      // Check if filters actually changed to avoid unnecessary re-renders
+      const merged = {
+        ...prev,
+        ...newFilters,
+        page: newFilters.page || 1
+      }
+      
+      // Only update if something changed
+      if (
+        merged.keyword === prev.keyword &&
+        merged.minPrice === prev.minPrice &&
+        merged.maxPrice === prev.maxPrice &&
+        merged.status === prev.status &&
+        merged.sortBy === prev.sortBy &&
+        merged.sortOrder === prev.sortOrder &&
+        merged.page === prev.page
+      ) {
+        return prev // No change, skip update
+      }
+      
+      return merged
+    })
   }, [])
 
   /**
@@ -95,13 +122,13 @@ export function useProducts(options: UseProductsOptions = {}): UseProductsReturn
   }, [initialFilters])
 
   /**
-   * Auto-fetch on mount or filters change
+   * Fetch products when filters change
    */
   useEffect(() => {
     if (autoFetch) {
       fetchProducts()
     }
-  }, [autoFetch, fetchProducts])
+  }, [filters.page, filters.keyword, filters.minPrice, filters.maxPrice, filters.status, filters.sortBy, filters.sortOrder, autoFetch])  // Depend on individual filter properties, not the whole object
 
   return {
     data,

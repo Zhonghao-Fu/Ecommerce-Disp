@@ -10,6 +10,7 @@
 - 性能优化：分页加载，避免一次性加载过多数据
 - 状态管理：清晰处理 loading、error、empty 状态
 - 组件化：复用商品卡片、分页、筛选等组件
+- **默认筛选**：用户端默认只显示在架商品（`status: 'on_sale'`）
 
 ---
 
@@ -40,8 +41,9 @@
    - 与筛选组件联动
    - 关键词搜索
    - 价格区间筛选
-   - 状态筛选
+   - 状态筛选（默认：在售）
    - 排序选择
+   - **注意**：用户端默认 `status: 'on_sale'`，筛选器选择"全部"时显示所有商品（包括下架）
 
 5. **状态处理**
    - Loading 状态（首次加载、分页切换）
@@ -130,7 +132,7 @@ export default function ProductList() {
     keyword: searchParams.get('keyword') || undefined,
     minPrice: searchParams.get('minPrice') ? parseFloat(searchParams.get('minPrice')!) : undefined,
     maxPrice: searchParams.get('maxPrice') ? parseFloat(searchParams.get('maxPrice')!) : undefined,
-    status: (searchParams.get('status') as 'on_sale' | 'off_sale') || 'on_sale',
+    status: (searchParams.get('status') as 'on_sale' | 'off_sale' | 'all') || 'on_sale', // 默认只显示在架商品
     sortBy: (searchParams.get('sortBy') as any) || 'createdAt',
     sortOrder: (searchParams.get('sortOrder') as 'asc' | 'desc') || 'desc',
   })
@@ -145,7 +147,7 @@ export default function ProductList() {
     try {
       const result = await productApi.getProducts({
         ...params,
-        status: params.status || 'on_sale', // 默认只显示上架商品
+        status: params.status || 'on_sale', // 默认只显示在架商品，'all' 显示所有商品
       })
       
       setProducts(result.items)

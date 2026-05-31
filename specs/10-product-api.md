@@ -171,7 +171,7 @@ export default router
 | `keyword` | string | ❌ | - | 关键词搜索（商品名称） | `耳机` |
 | `minPrice` | number | ❌ | - | 最低价格（元） | `100` |
 | `maxPrice` | number | ❌ | - | 最高价格（元） | `500` |
-| `status` | string | ❌ | - | 商品状态：on_sale / off_sale | `on_sale` |
+| `status` | string | ❌ | - | 商品状态：`all` / `on_sale` / `off_sale`（默认：不传或 `all` 显示所有商品） | `on_sale` |
 | `sortBy` | string | ❌ | createdAt | 排序字段：price / createdAt / name | `price` |
 | `sortOrder` | string | ❌ | desc | 排序方向：asc / desc | `asc` |
 
@@ -602,7 +602,7 @@ export const productQuerySchema = z.object({
     .string()
     .optional()
     .transform((val) => (val ? parseFloat(val) : undefined)),
-  status: z.enum(['on_sale', 'off_sale']).optional(),
+  status: z.enum(['all', 'on_sale', 'off_sale']).optional().default('all'),
   sortBy: z.enum(['price', 'createdAt', 'name']).optional().default('createdAt'),
   sortOrder: z.enum(['asc', 'desc']).optional().default('desc'),
 })

@@ -1,7 +1,9 @@
 import express, { Request, Response, NextFunction } from 'express'
 import cors from 'cors'
+import path from 'path'
 import { PrismaClient } from '@prisma/client'
 import { ProductRouter } from './routes/product.routes'
+import { CurrencyRouter } from './routes/currency.routes'
 import { errorHandler } from './middleware/errorHandler'
 import { NotFoundError } from './middleware/errors'
 import { requestIdMiddleware } from './middleware/requestId'
@@ -38,6 +40,9 @@ app.use(express.json())
 // Parse URL-encoded request bodies
 app.use(express.urlencoded({ extended: true }))
 
+// Serve uploaded files statically
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')))
+
 // Request logging (development)
 if (process.env.NODE_ENV !== 'production') {
   app.use((req: Request, res: Response, next: NextFunction) => {
@@ -59,6 +64,7 @@ app.get('/api/health', (req: Request, res: Response) => {
 
 // API v1 routes
 app.use('/api/v1', ProductRouter)
+app.use('/api/v1', CurrencyRouter)
 
 // ===== Error Handling =====
 

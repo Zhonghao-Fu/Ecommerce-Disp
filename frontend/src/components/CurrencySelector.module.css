@@ -1,0 +1,35 @@
+.currencySelector {
+  display: flex;
+  align-items: center;
+}
+
+.select {
+  padding: 6px 12px;
+  background-color: white;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s;
+  outline: none;
+  min-width: 100px;
+}
+
+.select:hover {
+  border-color: #1890ff;
+}
+
+.select:focus {
+  border-color: #1890ff;
+  box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .select {
+    min-width: 90px;
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+}

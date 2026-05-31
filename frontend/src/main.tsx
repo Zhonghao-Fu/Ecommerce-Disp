@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
 import { logEnvConfig } from './config/env'
+import { LanguageProvider } from './i18n/LanguageProvider'
+import { CurrencyProvider } from './context/CurrencyContext'
 
 /**
  * Application Entry Point
@@ -14,6 +16,10 @@ logEnvConfig()
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    <LanguageProvider>
+      <CurrencyProvider>
+        <App />
+      </CurrencyProvider>
+    </LanguageProvider>
   </React.StrictMode>
 )

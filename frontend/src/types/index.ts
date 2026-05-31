@@ -14,5 +14,7 @@ export type {
   ApiResponse,
   ApiError,
   ProductFilterState,
-  ProductQueryParams
+  ProductQueryParams,
+  ImportError,
+  ImportResult
 } from './api'

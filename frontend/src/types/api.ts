@@ -60,3 +60,23 @@ export interface ProductQueryParams {
   sortBy?: 'price' | 'name' | 'createdAt'
   sortOrder?: 'asc' | 'desc'
 }
+
+/**
+ * Import error information
+ */
+export interface ImportError {
+  row: number
+  name: string
+  error: string
+}
+
+/**
+ * Import result information
+ */
+export interface ImportResult {
+  total: number
+  success: number
+  failed: number
+  skipped: number
+  errors: ImportError[]
+}

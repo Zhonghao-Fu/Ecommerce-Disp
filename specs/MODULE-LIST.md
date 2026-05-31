@@ -15,6 +15,10 @@
 | 07 | 页脚模块 | [07-footer.md](./07-footer.md) | ✅ 已完成 | 联系方式、社交媒体、版权信息 |
 | 08 | 路由管理模块 | [08-routing.md](./08-routing.md) | ✅ 已完成 | 前端路由配置与页面切换 |
 | 09 | 响应式布局模块 | [09-responsive-layout.md](./09-responsive-layout.md) | ⏳ 待编写 | PC/平板/手机多端适配 |
+| 21 | 商品管理后台模块 | [21-admin-panel.md](./21-admin-panel.md) | 🔨 开发中 | 商品 CRUD 管理、图片上传、状态管理 |
+| 22 | 商品导入/导出模块 | [22-import-export.md](./22-import-export.md) | 🔨 开发中 | CSV格式批量导入/导出、字段可配置、混合模式 |
+| 23 | 多语言国际化模块 | [23-i18n.md](./23-i18n.md) | ✅ 已完成 | react-intl集成、4种语言、自动检测、持久化 |
+| 24 | 货币转换模块 | [24-currency-conversion.md](./24-currency-conversion.md) | ✅ 已完成 | ExchangeRate-API集成、4种货币、4小时缓存、降级方案 |
 
 ## 🔧 后端模块
 
@@ -39,10 +43,10 @@
 
 ## 📊 模块统计
 
-- **前端模块**: 9 个
-- **后端模块**: 5 个
+- **前端模块**: 13 个
+- **后端模块**: 6 个
 - **通用模块**: 6 个
-- **总计**: 20 个模块
+- **总计**: 24 个模块
 
 ## 📝 使用说明
 
@@ -75,7 +79,19 @@
   │   ├── 03-product-filter (筛选)
   │   ├── 04-product-card (卡片)
   │   └── 06-pagination (分页)
-  └── 05-product-detail (详情页)
+  ├── 05-product-detail (详情页)
+  └── 21-admin-panel (管理后台)
+      ├── admin/StatsCards (统计卡片)
+      ├── admin/ProductTable (商品表格)
+      ├── admin/ProductFormModal (表单模态框)
+      ├── admin/ImageUploader (图片上传)
+      ├── admin/ExportDialog (导出对话框)
+      ├── admin/ImportDialog (导入对话框)
+      └── admin/ImportReport (导入报告)
+  └── 22-import-export (导入/导出)
+      ├── config/export-fields (字段配置)
+      ├── services/importExport (API服务)
+      └── admin/* (UI组件)
 
 01-navbar (导航栏) → 全局
 07-footer (页脚) → 全局
@@ -87,12 +103,14 @@
 11-data-model (数据模型)
   └── 12-product-controller (控制器)
       └── 10-product-api (API接口)
+      └── upload.ts (文件上传中间件)
 
 13-cors-config (跨域) → 全局
 14-error-handling (错误处理) → 全局
 
 前后端连接：
 15-api-service (API服务层) → 10-product-api (API接口)
+  └── services/upload.ts (上传服务) → upload/products API
 
 配置相关：
 18-environment-config (环境变量) → 全局
@@ -102,7 +120,7 @@
 
 ---
 
-**最后更新**: 2026-05-29  
+**最后更新**: 2026-05-30  
 **维护者**: AI Assistant
 
 ---

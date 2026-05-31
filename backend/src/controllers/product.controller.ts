@@ -64,7 +64,7 @@ export const ProductController = {
       keyword,
       minPrice,
       maxPrice,
-      status = 'on_sale',
+      status,
       sortBy = 'createdAt',
       sortOrder = 'desc'
     } = params
@@ -72,13 +72,14 @@ export const ProductController = {
     // Build where clause
     const where: any = {}
 
-    // Default to on_sale only
+    // Status filter: only filter if explicitly set to 'on_sale' or 'off_sale'
+    // 'all' or undefined means no status filter
     if (status === 'on_sale') {
       where.status = 'on_sale'
     } else if (status === 'off_sale') {
       where.status = 'off_sale'
     }
-    // 'all' means no status filter
+    // 'all' or undefined: no status filter applied (shows all products)
 
     // Keyword search (name or description)
     if (keyword) {

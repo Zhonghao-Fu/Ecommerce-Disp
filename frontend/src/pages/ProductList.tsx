@@ -1,9 +1,13 @@
 import { useState } from 'react'
+import { useIntl } from 'react-intl'
 import { useProducts } from '../hooks'
 import { ProductGrid, Pagination, Loading, Empty, ProductFilter } from '../components'
+import { useCurrency } from '../context/CurrencyContext'
 import styles from './ProductList.module.css'
 
 export default function ProductList() {
+  const intl = useIntl()
+  const { currency } = useCurrency()
   const [showFilters, setShowFilters] = useState(false)
 
   const {
@@ -16,7 +20,7 @@ export default function ProductList() {
     resetFilters
   } = useProducts({
     initialFilters: {
-      status: 'all',
+      status: 'on_sale',  // 用户端默认只显示在架商品
       sortBy: 'createdAt',
       sortOrder: 'desc'
     }
@@ -49,15 +53,15 @@ export default function ProductList() {
       {/* Page Header */}
       <div className={styles.header}>
         <div className={styles.headerContent}>
-          <h1 className={styles.title}>商品列表</h1>
+          <h1 className={styles.title}>{intl.formatMessage({ id: 'product.list.title' })}</h1>
           <div className={styles.headerActions}>
             <button
               className={styles.filterToggle}
               onClick={toggleFilters}
             >
-              {showFilters ? '隐藏筛选' : '显示筛选'}
+              {showFilters ? intl.formatMessage({ id: 'product.hideFilter' }) : intl.formatMessage({ id: 'product.showFilter' })}
             </button>
-            {(filters.keyword || filters.minPrice || filters.maxPrice || filters.status !== 'all') && (
+            {(filters.keyword || filters.minPrice || filters.maxPrice || filters.status !== 'on_sale') && (
               <button
                 className={styles.resetButton}
                 onClick={() => {
@@ -65,7 +69,7 @@ export default function ProductList() {
                   setShowFilters(false)
                 }}
               >
-                重置筛选
+                {intl.formatMessage({ id: 'product.resetFilter' })}
               </button>
             )}
           </div>
@@ -85,10 +89,16 @@ export default function ProductList() {
       {/* Results Info */}
       {pagination && (
         <div className={styles.resultsInfo}>
-          <span>
-            共 <strong>{pagination.total}</strong> 件商品
-            {filters.keyword && `，搜索关键词："${filters.keyword}"`}
-          </span>
+          <span dangerouslySetInnerHTML={{
+            __html: intl.formatMessage(
+              { id: 'product.results' },
+              { total: pagination.total }
+            )
+          }} />
+          {filters.keyword && (
+            <span>, {intl.formatMessage({ id: 'product.searchKeyword' }, { keyword: filters.keyword })}</span>
+          )}
+          <span> ({intl.formatMessage({ id: 'product.pricesIn' })}: {currency})</span>
         </div>
       )}
 
@@ -96,9 +106,9 @@ export default function ProductList() {
       {error && !products.length && (
         <Empty
           icon="❌"
-          title="加载失败"
+          title={intl.formatMessage({ id: 'product.loadFailed' })}
           description={error.message}
-          actionText="重新加载"
+          actionText={intl.formatMessage({ id: 'common.retry' })}
           onAction={() => setFilters({})}
         />
       )}
@@ -107,7 +117,7 @@ export default function ProductList() {
       {!error && (
         <ProductGrid
           products={products}
-          emptyMessage="暂无商品"
+          emptyMessage={intl.formatMessage({ id: 'product.empty' })}
         />
       )}
 
@@ -122,7 +132,7 @@ export default function ProductList() {
 
       {/* Loading indicator for subsequent loads */}
       {loading && products.length > 0 && (
-        <Loading message="加载中..." size="small" />
+        <Loading message={intl.formatMessage({ id: 'product.loading' })} size="small" />
       )}
     </div>
   )

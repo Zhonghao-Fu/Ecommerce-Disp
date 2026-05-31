@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "specs/MODULE-LIST.md",
+                "file": "specs/22-import-export.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "MODULE-LIST"
+              "title": "22-import-export"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "specs/MODULE-LIST.md",
+                "file": "specs/22-import-export.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "MODULE-LIST 的反向链接列表"
+              "title": "22-import-export 的反向链接列表"
             }
           },
           {
@@ -184,39 +184,50 @@
   },
   "active": "8b4c09cfc2966728",
   "lastOpenFiles": [
-    "frontend/vite.config.ts.timestamp-1780127813824-ddc2d06972ca98.mjs",
-    "frontend/vite.config.ts.timestamp-1780125733579-d58e531ee41e4.mjs",
-    "frontend/dist/index.html",
-    "frontend/dist/assets/ProductList-DfVyeXMX.js",
-    "frontend/dist/assets/ProductList-B3n81h5-.css",
-    "frontend/dist/assets/ProductDetail-BdxroUH1.css",
-    "frontend/dist/assets/ProductDetail-BbQb_rud.js",
-    "frontend/dist/assets/product-Davi5Ail.js",
-    "frontend/dist/assets/product-BLyCJNO2.css",
-    "frontend/dist/assets/index-CO-Ji3-W.js",
-    "frontend/dist/assets/index-AJZnXGD4.css",
-    "FunctionList.md",
+    "backend/prisma/dev.db-journal",
+    "specs/24-currency-conversion.md",
+    "frontend/src/components/CurrencySelector.module.css",
+    "frontend/src/components/CurrencySelector.tsx",
+    "frontend/src/context/CurrencyContext.tsx",
+    "frontend/src/context",
+    "backend/src/routes/currency.routes.ts",
+    "backend/src/services/exchange-rate.service.ts",
+    "backend/src/config/currency.ts",
+    "backend/_tmp_36788_7d08983ea6ad7dbaab41217f690d8a0a",
+    "specs/23-i18n.md",
+    "frontend/src/components/LanguageSelector.module.css",
+    "export_screenshot.png",
+    "TODO LIST.md",
     "FootPrint.md",
-    "specs/07-footer.md",
-    "specs/01-navbar.md",
-    "specs/MODULE-LIST.md",
-    "specs/17-empty-states.md",
-    "specs/16-loading-states.md",
-    "specs/10-product-api.md",
+    "specs/04-product-card.md",
     "specs/09-responsive-layout.md",
-    "specs/08-routing.md",
+    "FunctionList.md",
+    "specs/01-navbar.md",
+    "specs/15-api-service.md",
+    "specs/12-product-controller.md",
     "specs/06-pagination.md",
     "specs/05-product-detail.md",
-    "specs/04-product-card.md",
-    "specs/03-product-filter.md",
-    "specs/02-product-list.md",
-    "specs/15-api-service.md",
-    "specs/11-data-model.md",
-    "specs/12-product-controller.md",
-    "specs/20-project-structure.md",
-    "specs/14-error-handling.md",
-    "specs/18-environment-config.md",
-    "specs/13-cors-config.md",
-    "specs/19-typescript-types.md"
+    "specs/21-admin-panel.md",
+    "backend/node_modules/chalk/node_modules/supports-color/readme.md",
+    "backend/node_modules/chalk/node_modules/has-flag/readme.md",
+    "backend/node_modules/chalk/readme.md",
+    "backend/node_modules/istanbul-lib-coverage/README.md",
+    "backend/node_modules/istanbul-lib-coverage/CHANGELOG.md",
+    "backend/node_modules/@types/body-parser/README.md",
+    "backend/node_modules/@types/multer/README.md",
+    "backend/node_modules/functional-red-black-tree/README.md",
+    "backend/node_modules/formdata-polyfill/README.md",
+    "backend/node_modules/forwarded/README.md",
+    "backend/node_modules/forwarded/HISTORY.md",
+    "backend/node_modules/escape-html/Readme.md",
+    "backend/node_modules/mocha/assets/growl/ok.png",
+    "backend/node_modules/mocha/assets/growl/error.png",
+    "backend/node_modules/@prisma/studio/dist/assets/tick.8cbb6a93.svg",
+    "backend/node_modules/@prisma/studio/dist/assets/tick-indeterminate.aec8a44d.svg",
+    "backend/node_modules/@prisma/studio/dist/assets/string.ea615a24.svg",
+    "backend/node_modules/@prisma/studio/dist/assets/settings.5ad25af2.svg",
+    "backend/node_modules/@prisma/studio/dist/assets/search.2ed766ce.svg",
+    "backend/node_modules/@prisma/studio/dist/assets/refresh.d5448ccc.svg",
+    "backend/node_modules/@prisma/studio/dist/assets/plus.8fbf7ad3.svg"
   ]
 }
