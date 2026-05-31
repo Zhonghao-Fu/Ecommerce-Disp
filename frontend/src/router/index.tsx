@@ -89,8 +89,10 @@ function PageLoading() {
 /**
  * Main Router Component
  * Defines all application routes
+ * 
+ * @param basename - Base path for routing (used in GitHub Pages)
  */
-export default function AppRouter() {
+export default function AppRouter({ basename }: { basename?: string } = {}) {
   return (
     <Suspense fallback={<PageLoading />}>
       <Routes>
