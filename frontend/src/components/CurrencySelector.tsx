@@ -3,7 +3,7 @@
  * Dropdown for switching between supported currencies
  */
 
-import { useCurrency, CURRENCY_FLAGS, CURRENCY_NAMES, type Currency } from '../context/CurrencyContext'
+import { useCurrency, CURRENCY_FLAGS, type Currency } from '../context/CurrencyContext'
 import styles from './CurrencySelector.module.css'
 
 const SUPPORTED_CURRENCIES: Currency[] = ['CNY', 'USD', 'EUR', 'HKD']
