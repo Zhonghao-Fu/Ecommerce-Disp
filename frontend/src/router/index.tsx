@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom'
 import { lazy, Suspense } from 'react'
 import { Loading } from '../components'
 
@@ -27,12 +27,14 @@ function ContactPage() {
 }
 
 function HomePage() {
+  const navigate = useNavigate()
+  
   return (
     <div style={{ padding: '32px 20px', maxWidth: '1200px', margin: '0 auto' }}>
       <h1>首页</h1>
       <p>欢迎来到商品管理系统</p>
       <button
-        onClick={() => window.location.href = '/products'}
+        onClick={() => navigate('/products')}
         style={{
           padding: '12px 24px',
           backgroundColor: '#1890ff',
@@ -51,13 +53,15 @@ function HomePage() {
 }
 
 function NotFoundPage() {
+  const navigate = useNavigate()
+  
   return (
     <div style={{ padding: '80px 20px', textAlign: 'center' }}>
       <h1 style={{ fontSize: '72px', margin: '0', color: '#999' }}>404</h1>
       <h2 style={{ fontSize: '24px', color: '#666', marginTop: '16px' }}>页面不存在</h2>
       <p style={{ color: '#999', marginTop: '8px' }}>您访问的页面不存在或已被移除</p>
       <button
-        onClick={() => window.location.href = '/'}
+        onClick={() => navigate('/')}
         style={{
           padding: '10px 24px',
           backgroundColor: '#1890ff',
