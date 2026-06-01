@@ -5,7 +5,7 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   // GitHub Pages requires base path to match repository name
-  base: '/E-commerceProductDispWeb/',
+  base: '/Ecommerce-Disp/',
   plugins: [react()],
   resolve: {
     alias: {
