@@ -157,10 +157,13 @@ export class ImportService {
       status: status || 'on_sale',
     }
 
-    // Parse images (semicolon-separated)
+    // Parse images (semicolon-separated) and convert to JSON string
     const imagesStr = row['图片URL']?.trim()
     if (imagesStr) {
-      productData.images = imagesStr.split(';').map(url => url.trim()).filter(url => url)
+      const imageArray = imagesStr.split(';').map(url => url.trim()).filter(url => url)
+      productData.images = JSON.stringify(imageArray)  // Convert array to JSON string for DB storage
+    } else {
+      productData.images = '[]'  // Default empty array as JSON string
     }
 
     // Handle ID (optional - if empty, will create new product)
