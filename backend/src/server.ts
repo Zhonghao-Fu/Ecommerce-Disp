@@ -11,7 +11,7 @@ import { responseTimeMiddleware } from './middleware/responseTime'
 import { checkDatabaseConnection, gracefulShutdown } from './utils/database'
 
 const app = express()
-const PORT = process.env.PORT || 4000
+const PORT: number = parseInt(process.env.PORT || '4000', 10)
 
 // Initialize Prisma Client
 const prisma = new PrismaClient()
