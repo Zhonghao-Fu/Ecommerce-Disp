@@ -206,4 +206,4 @@ router.post(
   }
 )
 
-export { router as ProductRouter }
+export const ProductRouter = router

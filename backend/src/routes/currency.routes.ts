@@ -133,4 +133,4 @@ router.post('/currency/convert', async (req: Request, res: Response) => {
   }
 })
 
-export { router as CurrencyRouter }
+export const CurrencyRouter = router
