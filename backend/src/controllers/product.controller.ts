@@ -125,7 +125,7 @@ export const ProductController = {
     })
 
     // Transform products (convert cents to yuan, parse images)
-    const transformedProducts = products.map(product => ({
+    const transformedProducts = products.map((product: any) => ({
       id: product.id,
       name: product.name,
       price: centsToYuan(product.price),

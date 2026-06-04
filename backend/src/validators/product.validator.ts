@@ -13,7 +13,12 @@ export const createProductSchema = z.object({
     
     description: z.string().max(5000, 'Description too long').optional().default(''),
     
-    images: z.array(z.string().url('Invalid image URL')).max(10, 'Maximum 10 images allowed').optional().default([]),
+    images: z.array(
+      z.string().refine((val) => {
+        // Allow relative paths (starting with /) or valid URLs
+        return val.startsWith('/') || /^https?:\/\//.test(val)
+      }, 'Invalid image URL: must be a relative path (e.g., /uploads/xxx.jpg) or a valid HTTP(S) URL')
+    ).max(10, 'Maximum 10 images allowed').optional().default([]),
     
     status: z.enum(['on_sale', 'off_sale']).optional().default('on_sale')
   })
@@ -28,7 +33,12 @@ export const updateProductSchema = z.object({
     
     description: z.string().max(5000, 'Description too long').optional(),
     
-    images: z.array(z.string().url('Invalid image URL')).max(10, 'Maximum 10 images allowed').optional(),
+    images: z.array(
+      z.string().refine((val) => {
+        // Allow relative paths (starting with /) or valid URLs
+        return val.startsWith('/') || /^https?:\/\//.test(val)
+      }, 'Invalid image URL: must be a relative path (e.g., /uploads/xxx.jpg) or a valid HTTP(S) URL')
+    ).max(10, 'Maximum 10 images allowed').optional(),
     
     status: z.enum(['on_sale', 'off_sale']).optional()
   })

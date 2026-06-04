@@ -121,7 +121,10 @@ router.post(
         })
       }
 
-      const imageUrl = `/uploads/products/${req.file.filename}`
+      // 构建完整 URL（支持本地开发和生产环境）
+      const protocol = req.protocol
+      const host = req.get('host')
+      const imageUrl = `${protocol}://${host}/uploads/products/${req.file.filename}`
 
       res.json({
         success: true,
