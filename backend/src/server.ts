@@ -78,7 +78,7 @@ app.use(errorHandler)
 
 // ===== Start Server =====
 
-const server = app.listen(PORT, async () => {
+const server = app.listen(PORT, '0.0.0.0', async () => {
   console.log('\n' + '='.repeat(50))
   console.log('🚀 Server is running on http://localhost:' + PORT)
   console.log('📊 Health check: http://localhost:' + PORT + '/api/health')
